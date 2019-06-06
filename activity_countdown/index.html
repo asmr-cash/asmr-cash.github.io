@@ -66,19 +66,24 @@
 				<!-- 5.3 countdown container -->
 				<div class="countdown-container" id="lwt-countdown">
 					<div class="dash days_dash wow zoomIn" data-wow-delay="0.4s">
-						<div class="digit">0</div><div class="digit">0</div><div class="digit">0</div>
+						<div class="digit" id="jq_day1">0</div>
+						<div class="digit" id="jq_day2">0</div>
+						<div class="digit" id="jq_day3">0</div>
 						<span class="dash_title">天</span>
 					</div>
 					<div class="dash hours_dash wow zoomIn" data-wow-delay="0.5s">
-						<div class="digit">0</div><div class="digit">0</div>
+						<div class="digit" id="jq_hours1">0</div>
+						<div class="digit" id="jq_hours2">0</div>
 						<span class="dash_title">时</span>
 					</div>
 					<div class="dash minutes_dash wow zoomIn" data-wow-delay="0.6s">
-						<div class="digit">0</div><div class="digit">0</div>
+						<div class="digit" id="jq_minutes1">0</div>
+						<div class="digit" id="jq_minutes2">0</div>
 						<span class="dash_title">分</span>
 					</div>
 					<div class="dash seconds_dash wow zoomIn" data-wow-delay="0.7s">
-						<div class="digit">0</div><div class="digit">0</div>
+						<div class="digit" id="jq_seconds1">0</div>
+						<div class="digit" id="jq_seconds2">0</div>
 						<span class="dash_title">秒</span>
 					</div>
 				</div>
@@ -107,6 +112,7 @@
 						text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 						color: #e906e7;
 						text-decoration-line: underline;
+						cursor: pointer;
 					">传送门</span></a></p>
 					<!-- Begin Subscribe Form -->
 					<div id="form">
@@ -171,7 +177,7 @@
 <!--===== End Footer =====-->
 
 
-<div id="jquery_jplayer_1"></div> <!-- Background Sound, Remove if you don't need this -->
+<!-- <div id="jquery_jplayer_1"></div> Background Sound, Remove if you don't need this -->
 
 
 <!-- Theme JS -->
@@ -182,6 +188,83 @@
 <script src="js/vegas.min.js"></script>
 <script src="js/theme.js"></script>
 
+<script>
+	var targetTime = "2019/06/07 20:00:00";
+	// var goInterval = 5;
+	//倒计时
+	$(function() {
+		window.goIntervalTimer = window.setInterval("gocountdown()", 1000);
+	})
+	var gocountdown = function() {
+		var diffTime = new Date(targetTime).getTime() - new Date();
+		if (diffTime <= 0) {
+			window.clearInterval(goIntervalTimer);
+			// window.location.href = "targetUrl";//倒计时完，就跳空投页
+		} else {
+			getDiffTime();
+		}
+	};
+
+	var getDiffTime = function() {
+		var date1= '2019/06/07 20:00:00';  //开始时间
+        var date2 = new Date();    //结束时间
+        var date3 = new Date(date1).getTime() - date2.getTime();   //时间差的毫秒数      
+ 
+        //------------------------------
+ 
+        //计算出相差天数
+        var days=Math.floor(date3/(24*3600*1000))
+ 
+        //计算出小时数
+ 
+        var leave1=date3%(24*3600*1000)    //计算天数后剩余的毫秒数
+        var hours=Math.floor(leave1/(3600*1000))
+        //计算相差分钟数
+        var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+        var minutes=Math.floor(leave2/(60*1000))
+        //计算相差秒数
+        var leave3=leave2%(60*1000)      //计算分钟数后剩余的毫秒数
+        var seconds=Math.round(leave3/1000)
+        // console.info(" 相差 "+days+"天 "+hours+"小时 "+minutes+" 分钟"+seconds+" 秒")
+
+		//set the val
+		//day
+		if((days+'').length >= 3){
+			$("#jq_day1").html((days+'').substring(0,1));
+			$("#jq_day2").html((days+'').substring(1,2));
+			$("#jq_day3").html((days+'').substring(2,3));
+		}else if((days+'').length == 2){
+			$("#jq_day2").html((days+'').substring(0,1));
+			$("#jq_day3").html((days+'').substring(1,2));
+		}else{
+			$("#jq_day3").html(days);
+		}
+
+		//hours
+		if((hours+'').length == 2){
+			$("#jq_hours1").html((hours+'').substring(0,1));
+			$("#jq_hours2").html((hours+'').substring(1,2));
+		}else{
+			$("#jq_hours2").html(hours);
+		}
+
+		//minutes
+		if((minutes+'').length == 2){
+			$("#jq_minutes1").html((minutes+'').substring(0,1));
+			$("#jq_minutes2").html((minutes+'').substring(1,2));
+		}else{
+			$("#jq_minutes2").html(minutes);
+		}
+
+		//seconds
+		if((seconds+'').length == 2){
+			$("#jq_seconds1").html((seconds+'').substring(0,1));
+			$("#jq_seconds2").html((seconds+'').substring(1,2));
+		}else{
+			$("#jq_seconds2").html(seconds);
+		}
+	}
+</script>
 
 </body>
 </html>
