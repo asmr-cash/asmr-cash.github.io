@@ -193,7 +193,7 @@
 <script src="js/theme.js"></script>
 
 <script>
-	var targetTime = "2019/06/10 20:00:00";
+	var targetTime = "2019/06/18 20:00:00";
 	// var goInterval = 5;
 	//倒计时
 	$(function() {
@@ -203,8 +203,8 @@
 		var diffTime = new Date(targetTime).getTime() - new Date();
 		if (diffTime <= 0) {
 			window.clearInterval(goIntervalTimer);
-			var targetUrl = "https://blocknetwork.readthedocs.io/zh_CN/latest/token/airdrop_via_contract.html?v=201906160001";
-			window.location.href = "targetUrl";//倒计时完，就跳空投页
+			var targetUrl = "https://blocknetwork.readthedocs.io/zh_CN/latest/token/airdrop_via_contract.html?v=201906160006";
+			window.location.href = targetUrl;//倒计时完，就跳空投页
 		} else {
 			getDiffTime();
 		}
